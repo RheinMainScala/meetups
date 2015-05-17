@@ -16,3 +16,8 @@ Again, upon first launch sbt needs to pull in some dependencies which may take s
 The tests will fail with errors, as long as you have nothing implemented.
 Edit the file `src/main/scala/List.scala` to implement the exercises and re-run the
 tests to check the correctness.
+
+
+There are two Unit test files, one created by Franck and one by Martin.
+They use different testing frameworks but should both work with the method described above.
+
