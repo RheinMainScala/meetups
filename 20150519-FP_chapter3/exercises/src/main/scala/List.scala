@@ -29,16 +29,7 @@ object List {
       case Nil => a2
       case Cons(h,t) => Cons(h, append(t, a2))
     }
-  
-  def sum2(ns: List[Int]) =
-    foldRight(ns, 0)((x,y) => x + y)
-    
-  def product2(ns: List[Double]) =
-    foldRight(ns, 1.0)(_ * _)
-    
-  def length2[A](l: List[A]): Int = {
-    -1
-  }
+
   /*
    * EXERCISES
    * 
@@ -98,9 +89,32 @@ object List {
   def foldLeft[A,B](as: List[A], z: B)(f: (B, A) => B): B = sys.error("todo")
   
   /*
+   * EXERCISE 3.11
+   */
+  
+  def productFoldLeft(ns: List[Double]) = sys.error("todo")
+  
+  def sumFoldLeft(l: List[Int]): Int = sys.error("todo")
+  
+  def lengthFoldLeft(l: List[Int]): Int = sys.error("todo")
+  /*
    * EXERCISE 3.12
    */
   def reverse[A] (l: List[A]): List[A] = sys.error("todo")
+  
+  def reverseWithFold[A] (l: List[A]): List[A] = sys.error("todo")
+
+  /*
+   * EXERCISE 3.13
+   */
+  def foldLeftViaFoldRight[A,B](as: List[A], z: B)(f: (B, A) => B): B = sys.error("todo")
+  
+  /*
+   * EXERCISE 3.14
+   */
+  def appendViaFoldLeft[A](a1: List[A], a2: List[A]): List[A] = sys.error("todo")
+  
+  def appendViaFoldRight[A](a1: List[A], a2: List[A]): List[A] = sys.error("todo")
   
   /*
    * EXERCISE 3.15 (HARD)

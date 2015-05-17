@@ -175,15 +175,15 @@ class Exercise3Tests {
   @Test 
   def testExercise_3_11() {   // sum, product and length via foldLeft
       val l1 = List(1,2,3,4,5)  
-      val s = List.sum2(l1)
+      val s = List.sumFoldLeft(l1)
       assertEquals(15, s)
       
       val l2 = List(1.0,2.0,3.0,4.0,5.0)
-      val p = List.product2(l2)
+      val p = List.productFoldLeft(l2)
       assertEquals(120.0, p, 0.00001)
       
       val l3 = List(1,2,3,4,5)
-      val l = List.length2(l3)
+      val l = List.lengthFoldLeft(l3)
       assertEquals(5, l)      
   }
 
@@ -403,7 +403,7 @@ class Exercise3Tests {
   }
 
   // ------------------ Tree ------------------------------------------------------------------------------------------------
-  
+  /*
   @Test 
   def testExercise_3_25() {
     sys.error("todo implement test")
@@ -428,4 +428,5 @@ class Exercise3Tests {
   def testExercise_3_29() {
     sys.error("todo implement test")
   }
+  */
 }
