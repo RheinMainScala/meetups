@@ -32,29 +32,56 @@ class: center
 
 # Functional Datastructures
 
-#### Operated on by *pure functions*
-#### Are by definition immutable
-#### `Singly Linked List` in this chapter
+Operated on by *pure functions*    
+
+--
+
+Are by definition immutable    
+
+--
+
+Singly Linked List in this chapter
+
+![Default-aligned image](images/linkedlist.png)
 
 ---
 class: center
 
 # Data Sharing
 
-#### Operations must not modify List in-place
-#### Must therefore return a new List
-#### Does that lead to huge duplications?
+Operations must not modify List in-place
+
+Does that lead to many duplications?
 
 --
 
-### Nope!
-... data sharing content ...
+
+Nope!
+
+--
+
+Parts are referenced by different "instances"
+
+![Default-aligned image](images/datasharing.png)
+
+--
+
+- Functional Datastructures are ***persistent***
+- No need for pessimistic copying
+- May lead to more efficient implementations
 
 ---
-class: center
 
 # Pattern Matching
 ...Pattern Matching Content...
+
+```scala
+def tellMe(i: Int): String = i match {
+  case 1 => "one"
+  case 2 => "two"
+  case _ => "dunno"
+}
+```
 
 ---
 class: center
