@@ -93,7 +93,7 @@ class: left
 
 --
 
-### Can be extend be classes or used with <code>with</code>
+### Can be extend by classes or traits or used with <code>with</code>
 
 --
 
@@ -196,7 +196,7 @@ trait Mammal {
 --
 
 ```Scala
-class Dolphin `extends Animal with Mammal` {
+class Dolphin `extends Animal with CanSwim with Mammal` {
 	override def toString = "Dolphin " + super.toString
 }
 class Cat `extends Animal with Mammal with Carnivore` {
@@ -215,22 +215,42 @@ object Main {
 ---
 class: left
 
-# Output of example 3 is ...
+## Example 3: Multiple <code>trait</code>s and class linearization
 
-<code>
-Dolphin is Mammal is Animal 
-
+```Scala
+// Output
+Dolphin is Mammal can swim is Animal 
 Cat is Carnivore can hunt is Mammal is Animal 
+Dog is Carnivore can hunt is Mammal can swim is Animal
+```
 
-Dog is Carnivore can hunt is Mammal can swim is Animal 
-</code>
+--
+
+##### 
+Reason: Calls to <code>super</code> are linearized as follows. As a rule of thumb, the runtime type for <code>super</code> can be found looking “left” in the complete, lineraized, unique supertype list of the instantiated class (i.e. <code>Cat</code>).
+
+```Scala
+// class Cat 
+extends Animal with Mammal with Carnivore with &lt;body&gt;
+```
+expands to 
+```Scala
+Any with AnyRef with Animal with        // full supertype list of Animal
+Any with AnyRef with Mammal with        // full supertype list of Mammal
+Any with AnyRef with CanHunt with Carnivore with  // full supertype list of Carnivore
+Any with AnyRef with &lt;body&gt;             // full supertype list of &lt;body&gt; 
+```
+After removing duplicates we get:
+```Scala
+Any with AnyRef with Animal with Mammal with CanHunt with Carnivore with &lt;body&gt;
+```
 
 ---
 class: left
 
 # Questions to you
 
-### 1) What happens if one changes <code>Mammal</code> to this:
+### 1. What happens if one changes <code>Mammal</code> to this:
 ```Scala
 trait Mammal {
 	override def toString = "is Mammal " // no call to super.toString anymore
@@ -239,17 +259,33 @@ trait Mammal {
 
 --
 
-### 2) What does it mean if <code>trait</code> methods are defined abstract:
+### 2. What does it mean if <code>trait</code> methods are defined abstract:
 ```Scala
 trait Mammal {
 	`abstract` override def toString = "is Mammal "
 }
 ```
-#### Hint: Google for "stackable trait pattern"
+Hint: Google for "stackable trait pattern"
 
 --
 
-### 3) (serious question): How could one document this stuff in UML?
+### 3. (serious question) How could one document such type hierarchies in something like UML?
+
+---
+
+# Links
+
+##### https://blog.safaribooksonline.com/2013/05/30/traits-how-scala-tames-multiple-inheritance/
+
+##### http://www.heise.de/developer/artikel/Konzept-der-Traits-228044.html
+
+##### http://tech.pro/blog/2114/scala-linearization-technique-to-avoid-multiple-inheritance
+
+##### https://stackoverflow.com/questions/2038370/traits-and-abstract-methods-override-in-scala
+
+##### http://www.artima.com/scalazine/articles/stackable_trait_pattern.html
+
+##### http://jim-mcbeath.blogspot.de/2009/08/scala-class-linearization.html
 
   </textarea>
   <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
