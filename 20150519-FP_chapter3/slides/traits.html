@@ -22,16 +22,231 @@ h1, h2, h3 {
 class: middle, center, inverse
 
 # Scala Study Group
-## Chapter 3 - A short look on Traits
-### What is a trait?
-### ...
+## 2015-05-19
+## Chapter 3 - A short look on <code>Trait</code>s
 
 ---
-class: center
+class: left
 
-# Definition of a Scala Trait
+# <code>List</code> class is a <code>trait</code>
 
-#### ...
+```Scala
+// List data type, parameterized on a type, A
+sealed trait List[+A] 
+
+// A List data constructor representing the empty list
+case object Nil extends List[Nothing] 
+
+// Another data constructor, representing nonempty lists. 
+// Note that tail is another List[A],
+// which may be Nil or another Cons.
+case class Cons[+A](head: A, tail: List[A]) extends List[A]
+```
+
+---
+class: left
+
+# A <code>Trait</code> is like a (Java) interface
+
+## Example 1: <code>MyTrait</code> as an interface
+
+```Scala
+trait MyTrait {
+*    val PI: Double = 3.1415f 
+*	def foo: String
+}
+```
+
+```Scala
+class MyClass extends MyTrait {
+     // implement method foo from MyTrait
+     //   (if it doesn't, MyClass has to be abstract)
+*    override def foo: String = "bar" + PI
+	 override def toString: String = foo
+}
+```
+
+```Scala
+object Main {
+  def main(args: Array[String]): Unit = {
+    val x = new MyClass
+    println (x.foo)			             // prints out "bar3.1414999961853027"
+  }
+}
+```
+
+---
+class: left
+
+# A <code>Trait</code> is like an abstract class.
+
+--
+
+### Can define implementation(s) of methods and fields. 
+
+--
+
+### Can extend other (abstract) classes and/or traits. 
+
+--
+
+### Can be extend be classes or used with <code>with</code>
+
+--
+
+### Can have type parameters.
+
+--
+
+### Main differences between abstract class and trait:
+#####   a) A <code>trait</code> must not have constructor(s) with parameters
+#####   b) A <code>trait</code> can be mixed (Mixin concept)
+#####   c) Runtime hierarchy extending base classes and <code>trait</code>s can get difficult
+
+---
+class: left
+
+## Example 2: Same as example 1 but with type parametrization
+
+```Scala
+trait MyTrait`[A]` {
+    def foo: A
+}
+```
+
+```Scala
+class MyClass extends MyTrait`[String]` {
+    // implement method foo from MyTrait
+    //   (if it doesn't, MyClass has to be abstract)
+    override def foo: `String` = "bar"
+	override def toString: String = foo
+}
+
+```
+
+```Scala
+object Main {
+  def main(args: Array[String]): Unit = {
+    val x = new MyClass
+    println (x.foo)			             // prints out "bar"
+  }
+}
+```
+
+---
+class: left
+## Example 3: Extending base class and trait mixin
+
+```Scala
+class MyAbstractSuperClass {
+	def smethod: String = "superMethod"
+}
+```
+
+```Scala
+trait MyTrait1 {
+  var counter: Int = 0
+    
+  def tMethod1: String={ counter+=1; "impl of trait method1 (" + counter + ")"; }
+  def tMethod2: String
+}
+```
+
+```Scala
+class MyClassA `extends MyAbstractSuperClass with MyTrait1` {
+  override def tMethod2: String = "impl of trait method2"
+  override def toString: String = smethod + " # " + tMethod1 + " # " + tMethod2
+}
+```
+
+```Scala
+object Main {
+  def main(args: Array[String]): Unit = println(new MyClassA)
+}
+```
+
+---
+class: left
+
+## Example 3: Multiple <code>trait</code>s and class linearization
+
+### 
+
+```Scala
+abstract class Animal { override def toString = "is Animal " }
+```
+
+--
+
+```Scala
+trait CanHunt { override def toString = "can hunt " + super.toString }
+trait CanSwim { override def toString = "can swim " + super.toString }
+
+trait Carnivore extends CanHunt {
+	override def toString = "is Carnivore " + super.toString
+}
+trait Mammal {
+	override def toString = "is Mammal " + super.toString()
+}
+```
+
+--
+
+```Scala
+class Dolphin `extends Animal with Mammal` {
+	override def toString = "Dolphin " + super.toString
+}
+class Cat `extends Animal with Mammal with Carnivore` {
+	override def toString = "Cat " + super.toString
+}
+class Dog `extends Animal with CanSwim with Mammal with Carnivore` {
+	override def toString = "Dog " + super.toString
+}
+
+object Main {
+  def main(args: Array[String]): Unit =
+      println(new Dolphin() + "\n"+ new Cat() + "\n" + new Dog())
+}
+```
+
+---
+class: left
+
+# Output of example 3 is ...
+
+<code>
+Dolphin is Mammal is Animal 
+
+Cat is Carnivore can hunt is Mammal is Animal 
+
+Dog is Carnivore can hunt is Mammal can swim is Animal 
+</code>
+
+---
+class: left
+
+# Questions to you
+
+### 1) What happens if one changes <code>Mammal</code> to this:
+```Scala
+trait Mammal {
+	override def toString = "is Mammal " // no call to super.toString anymore
+}
+```
+
+--
+
+### 2) What does it mean if <code>trait</code> methods are defined abstract:
+```Scala
+trait Mammal {
+	`abstract` override def toString = "is Mammal "
+}
+```
+#### Hint: Google for "stackable trait pattern"
+
+--
+
+### 3) (serious question): How could one document this stuff in UML?
 
   </textarea>
   <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
