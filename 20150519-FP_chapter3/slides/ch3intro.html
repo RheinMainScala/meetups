@@ -14,6 +14,19 @@ h1, h2, h3 {
   font-weight: normal;
 }
 .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+/* Two-column layout */
+.left-column {
+color: #777;
+width: 50%;
+float: left;
+}
+.left-column h2:last-of-type, .left-column h3:last-child {
+color: #000;
+}
+.right-column {
+width: 45%;
+float: right;
+}
 </style>
 </head>
 <body>
@@ -32,29 +45,110 @@ class: center
 
 # Functional Datastructures
 
-#### Operated on by *pure functions*
-#### Are by definition immutable
-#### `Singly Linked List` in this chapter
+Operated on by *pure functions*    
+
+--
+
+Are by definition immutable    
+
+--
+
+Singly Linked List in this chapter
+
+![Default-aligned image](images/linkedlist.png)
 
 ---
 class: center
 
 # Data Sharing
 
-#### Operations must not modify List in-place
-#### Must therefore return a new List
-#### Does that lead to huge duplications?
+Operations must not modify List in-place
+
+Does that lead to many duplications?
 
 --
 
-### Nope!
-... data sharing content ...
+
+Nope!
+
+--
+
+Parts are referenced by different "instances"
+
+![Default-aligned image](images/datasharing.png)
+
+--
+
+- Functional Datastructures are ***persistent***
+- No need for pessimistic copying
+- May lead to more efficient implementations
 
 ---
-class: center
+layout: false
 
 # Pattern Matching
-...Pattern Matching Content...
+similiar to a `switch` statement..
+
+--
+
+.. but much more powerful !
+
+
+.left-column[
+```scala
+def tellMeScala(i: Int): String = i match {
+  case 1 => "one"
+  case 2 => "two"
+  case _ => "dunno"
+}
+```
+]
+.right-column[
+```java
+String tellMeJava(int i) {
+  String result = "";
+  switch (i) {
+    case 1:  result = "one";
+             break;
+    case 2:  result = "two";
+             break;
+    default: result = "dunno";
+             break;
+  }
+  return result;
+}
+```
+]
+
+---
+#Pattern Matching
+
+- use literals to **filter** inputs
+- use data constructors and variables to capture sub-expressions
+- variables (e.g. ***_*** or ***a***) match anything
+
+---
+
+#Foo
+
+.left-column[
+```scala
+def tellMeScala(i: Int): String = i match {
+  case 1 => "one"
+  case 2 => "two"
+  case _ => "dunno"
+}
+```
+]
+.right-column[
+```scala
+def tellMeScala(i: Int): String = i match {
+  case 1 => "one"
+  case 2 => "two"
+  case _ => "dunno"
+}
+```
+]
 
 ---
 class: center
@@ -62,12 +156,11 @@ class: center
 # Today's Exercises
 
 GitHub repository for the Meetup:
-https://github.com/RheinMainScala/meetups
+https://github.com/RheinMainScala/meetups    
 
 
-Chapter 3 Exercise Skeletons:
-- [Francks fpinscala fork](https://github.com/RheinMainScala/fpinscala)
-- [My chapter 3 skeletons](https://github.com/RheinMainScala/meetups/tree/gh-pages/20150519-FP_chapter3/exercises)
+Chapter 3 Exercises, including Tests:
+https://github.com/RheinMainScala/fpinscala
 
   </textarea>
   <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
