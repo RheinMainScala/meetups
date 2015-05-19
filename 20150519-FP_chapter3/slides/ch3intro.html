@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Title</title>
+<title>Chapter 3 Intro</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <style type="text/css">
 @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -15,7 +15,7 @@ h1, h2, h3 {
 }
 .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
 .remark-slide-content {
-  padding: 0em 4em 0em 4em;
+  padding: 1em 2em 1em 2em;
 }
 /* Two-column layout */
 .left-column {
@@ -33,6 +33,10 @@ float: right;
 .after-columns {
   clear: both;
 }
+.quote {
+  padding: 2em 2em 2em 2em;
+  background-color: lightgrey;
+}
 </style>
 </head>
 <body>
@@ -47,25 +51,21 @@ class: middle, center, inverse
 ### Pattern Matching
 
 ---
-class: center
-
 # Functional Datastructures
 
-Operated on by *pure functions*    
+###Operated on by *pure functions*    
 
 --
 
-Are by definition immutable    
+###Are by definition immutable    
 
 --
 
-Singly Linked List in this chapter
+###Singly Linked List in this chapter
 
 ![Default-aligned image](images/linkedlist.png)
 
 ---
-class: center
-
 # Data Sharing
 
 Operations must not modify List in-place
@@ -75,7 +75,9 @@ Does that lead to many duplications?
 --
 
 
+.center[
 Nope!
+]
 
 --
 
@@ -90,7 +92,6 @@ Parts are referenced by different "instances"
 - May lead to more efficient implementations
 
 ---
-layout: false
 
 # Pattern Matching
 similiar to a `switch` statement..
@@ -159,16 +160,44 @@ case _ => ...
 
 ---
 
+#Pattern Matching
+#### Exercise 3.1: What is the result of this match expression?
+
+```scala
+val x = List(1,2,3,4,5) match {
+  case Cons(x, Cons(2, Cons(4, _))) => x
+  case Nil => 42
+  case Cons(x, Cons(y, Cons(3, Cons(4, _)))) => x + y
+  case Cons(h, t) => h + sum(t)
+  case _ => 101
+}
+```
+
+from the fpinscala book:
+
+.center.quote[
+A pattern matches the target
+if there exists an assignment of variables in the pattern to subexpressions of the target
+that make it structurally equivalent to the target.
+]
+
+---
+
 class: center
 
 # Today's Exercises
 
-GitHub repository for the Meetup:
+GitHub repository for the Meetup:    
 https://github.com/RheinMainScala/meetups    
 
 
-Chapter 3 Exercises, including Tests:
+Chapter 3 Exercises, including Tests:    
 https://github.com/RheinMainScala/fpinscala
+
+
+
+These slides:    
+https://rheinmainscala.github.io/meetups/20150519-FP_chapter3/slides/ch3intro.html
 
   </textarea>
   <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
