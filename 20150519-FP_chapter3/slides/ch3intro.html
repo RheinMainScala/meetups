@@ -14,18 +14,24 @@ h1, h2, h3 {
   font-weight: normal;
 }
 .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+.remark-slide-content {
+  padding: 0em 4em 0em 4em;
+}
 /* Two-column layout */
 .left-column {
 color: #777;
-width: 50%;
+width: 55%;
 float: left;
 }
 .left-column h2:last-of-type, .left-column h3:last-child {
 color: #000;
 }
 .right-column {
-width: 45%;
+width: 44%;
 float: right;
+}
+.after-columns {
+  clear: both;
 }
 </style>
 </head>
@@ -91,12 +97,9 @@ similiar to a `switch` statement..
 
 --
 
-.. but much more powerful !
-
-
 .left-column[
 ```scala
-def tellMeScala(i: Int): String = i match {
+def tellScala(i: Int): String = i match {
   case 1 => "one"
   case 2 => "two"
   case _ => "dunno"
@@ -120,37 +123,42 @@ String tellMeJava(int i) {
 ```
 ]
 
+--
+.after-columns[
+... but much more powerful !
+]
+
 ---
 #Pattern Matching
 
 - use literals to **filter** inputs
+```scala
+case 5 => ...
+```
+
+--
+
 - use data constructors and variables to capture sub-expressions
-- variables (e.g. ***_*** or ***a***) match anything
+```scala
+case Cons(x, xs) => ...
+```
+
+--
+
+- combine the two!
+```scala
+case Cons(5, xs) => ...
+```
+
+--
+
+- variables (e.g. ***_*** or ***a***) to match anything
+```scala
+case _ => ...
+```
 
 ---
 
-#Foo
-
-.left-column[
-```scala
-def tellMeScala(i: Int): String = i match {
-  case 1 => "one"
-  case 2 => "two"
-  case _ => "dunno"
-}
-```
-]
-.right-column[
-```scala
-def tellMeScala(i: Int): String = i match {
-  case 1 => "one"
-  case 2 => "two"
-  case _ => "dunno"
-}
-```
-]
-
----
 class: center
 
 # Today's Exercises
