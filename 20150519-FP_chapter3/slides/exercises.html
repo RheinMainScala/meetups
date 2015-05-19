@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Title</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type="text/css">
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+body { font-family: 'Droid Serif'; }
+h1, h2, h3 {
+  font-family: 'Yanone Kaffeesatz';
+  font-weight: normal;
+}
+.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+</style>
+</head>
+<body>
+  <textarea id="source">
+
+class: middle, center, inverse
+
+# Scala Study Group
+# 2015-05-19
+## Chapter 3 - Exercises on <code>List</code>s and <code>Tree</code>s
+
+---
+class: left
+
+# Exercise Block 1: Basics and Pattern Matching
+
+3.1)  <code>resultOfMatchExpression</code>: understand match expression (nothing to code)
+
+3.2)  <code>tail</code>: remove first element from List
+
+3.3)  <code>setHead</code>: replace first element in List
+
+<hr>
+
+
+3.4)  <code>drop</code>: remove the first n elements from List
+
+3.5)  <code>dropWhile</code>: remove from List while predicate function returns true
+
+<hr>
+
+
+3.6)  <code>init</code>: return all but last List element (how about calling this <code>removeLast</code>?)
+
+---
+class: left
+
+# Exercise Block 2: fold* methods
+
+#### <code>foldRight</code> (see listing 3.2 on book page 39) and usage in <code>sum2</code>, <code>product2</code>
+
+3.7)  question only (nothing to code)
+
+3.8)  question only (nothing to code)
+
+3.9)  <code>length</code> via <code>foldRight</code>
+
+<hr>
+
+
+3.10) <code>foldLeft</code>
+
+3.11) <code>sum3</code>, <code>product3</code> via <code>foldLeft</code>
+
+3.12) <code>reverse</code> a list (and also via <code>foldLeft</code> or <code>foldRight</code>)
+
+<hr>
+
+
+3.13) [!] <code>foldLeft</code> via <code>foldRight</code> - and vice versa 
+
+<hr>
+
+
+3.14) <code>append</code> element to list via <code>foldLeft</code> and/or <code>foldRight</code>
+
+3.15) <code>concat</code> lists (how about calling this <code>flatten</code>?)
+
+---
+class: left
+
+# Exercise Block 3: map, filter
+
+3.16) <code>addOne</code>: add one to each element of List[Int]
+
+3.17) <code>doubleToString</code>: List[Double] to List[String]
+
+<hr>
+
+
+3.18) <code>map</code>: call f for each element of List
+
+3.19) <code>filter</code>: remove any elements of List if they do not match a predicate
+
+3.20) <code>flatMap</code>: like map but f returns List[B]
+
+3.21) implement <code>filter</code> via <code>flatMap</code>
+
+<hr>
+
+Possible addon: <code>reduce</code> function
+
+<hr>
+
+3.22) "add" two lists (i.e. their corresponding elements)
+
+3.23) <code>zipWith</code>: generalization of 3.22
+
+<hr>
+
+3.24) <code>hasSubsequence</code> (check if given List can be found in other List)
+
+---
+class: left
+
+# Exercise Block 4: <code>Tree</code> stuff
+
+Possible addon: <code>Tree.apply</code>
+
+<hr>
+
+3.25) <code>size</code>: count the overall number of tree nodes
+
+3.26) <code>maximum</code>: get the maximum leaf value
+
+3.27) <code>depth</code>: get the maximum depth of the tree
+
+<hr>
+
+3.28) <code>map</code>: map leaf values with function f
+
+3.29) [!] <code>fold</code> and rewrite <code>size</code>, <code>maximum</code>, <code>depth</code>, <code>map</code>
+
+  </textarea>
+  <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+  </script>
+  <script>
+    var slideshow = remark.create();
+  </script>
+</body>
+</html>
