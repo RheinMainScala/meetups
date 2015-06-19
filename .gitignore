@@ -2,6 +2,7 @@
 .classpath
 .history
 .idea
+*.md.html
 .metadata/
 *.old
 .project
