@@ -9,7 +9,7 @@
 
 ```Scala
 def myStrictFunction(strictParam1:Int, strictParam2:Int)
-myStrictFunction(42, extensiveComputation())
+myStrictFunction(42, expensiveComputation())
 ```
 
 A strict function takes its arguments **"by value"**.
@@ -26,7 +26,7 @@ def myNonStrictFunction(strictParam1: Int, nonStrictParam2: => Int) = {
     nonStrictParam2*2     // ...and here.
 }
 
-myNonStrictFunction(42, extensiveComputation())
+myNonStrictFunction(42, expensiveComputation())
 ```
 
 A non-strict function takes its arguments **"by name"**.
